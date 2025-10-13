@@ -3,13 +3,34 @@ import { LoginPayload, User } from './types';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000/api',
-  withCredentials: true, // include cookies if backend uses them
+  withCredentials: true, 
 });
 
+// LOGIN
 export async function signIn(payload: LoginPayload) {
+    console.log("🧾 Sending payload:", payload);
+
   const { data } = await api.post('/auth/login', payload);
-  return data; // expected { user, token } or similar
+  console.log("Login:", data)
+  return data; 
 }
+
+// REGISTER
+export const registerUser = async (data: {
+  name: string;
+  email: string;
+  password: string;
+  profile: {
+    age: number;
+    heightCm: number;
+    weightKg: number;
+  };
+}) => {
+  const res = await api.post("/auth/register", data);
+  console.log("Register:", data);
+  return res.data;
+};
+
 
 export async function fetchCurrentUser(): Promise<User | null> {
   try {

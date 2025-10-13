@@ -1,21 +1,24 @@
 "use client";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { signIn } from "../../../lib/api";
+import Link from "next/link";
 
 type FormData = { email: string; password: string };
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<FormData>();
+    const [message, setMessage] = useState("");
 
   async function onSubmit(data: FormData) {
     try {
       const res = await signIn(data);
+      setMessage("✅ Login successful!");
       // For now, log response. Later use context to store user.
       console.log("login succeeded", res);
       // redirect or update UI as needed
-    } catch (err) {
-      console.error(err);
-      alert("Login failed");
+    } catch (error: any) {
+      setMessage(`❌ ${error.response?.data?.message || "Login failed"}`);
     }
   }
 
@@ -38,6 +41,16 @@ export default function LoginPage() {
           Sign in
         </button>
       </form>
+
+      {/* Link to Register */}
+      <p className="mt-4 text-sm">
+        Don’t have an account?{" "}
+        <Link href="/auth/register" className="text-blue-400 hover:underline">
+          Register
+        </Link>
+      </p>
+
+      {message && <p className="mt-4 text-center">{message}</p>}
     </div>
   );
 }
