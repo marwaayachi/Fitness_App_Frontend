@@ -1,6 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { signIn } from "../../../lib/api";
 import Link from "next/link";
 
@@ -9,14 +10,15 @@ type FormData = { email: string; password: string };
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<FormData>();
     const [message, setMessage] = useState("");
+    const router = useRouter();
+
 
   async function onSubmit(data: FormData) {
     try {
       const res = await signIn(data);
       setMessage("✅ Login successful!");
-      // For now, log response. Later use context to store user.
       console.log("login succeeded", res);
-      // redirect or update UI as needed
+      router.push("/user");
     } catch (error: any) {
       setMessage(`❌ ${error.response?.data?.message || "Login failed"}`);
     }

@@ -10,7 +10,9 @@ const api = axios.create({
 export async function signIn(payload: LoginPayload) {
     console.log("🧾 Sending payload:", payload);
 
-  const { data } = await api.post('/auth/login', payload);
+  const { data } = await api.post('/auth/login', payload, {
+    withCredentials: true,
+  });
   console.log("Login:", data)
   return data; 
 }
@@ -32,13 +34,13 @@ export const registerUser = async (data: {
 };
 
 
-export async function fetchCurrentUser(): Promise<User | null> {
+export async function checkAuth() {
   try {
-    const { data } = await api.get('/auth/me');
-    return data.user;
-  } catch {
-    return null;
+    const res = await axios.get("/auth/me", {
+      withCredentials: true, 
+    });
+    return res.data.user; // your backend should return the current user
+  } catch (err) {
+    return null; // not authenticated
   }
 }
-
-export default api;

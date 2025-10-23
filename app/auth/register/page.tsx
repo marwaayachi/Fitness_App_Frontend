@@ -2,6 +2,8 @@
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import Link from "next/link";
 import { registerUser } from "@/lib/api";
 
@@ -22,6 +24,8 @@ export default function RegisterForm() {
   } = useForm<RegisterFormInputs>();
 
   const [message, setMessage] = useState("");
+  const router = useRouter();
+
 
   const onSubmit = async (data: RegisterFormInputs) => {
     try {
@@ -36,6 +40,7 @@ export default function RegisterForm() {
         },
       });
       setMessage("✅ Registration successful!");
+      router.push("/user");
     } catch (error: any) {
       setMessage(
         `❌ ${error.response?.data?.message || "Registration failed"}`

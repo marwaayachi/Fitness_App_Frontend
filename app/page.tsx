@@ -18,26 +18,22 @@ export default function Home() {
               Go to Dashboard
             </Link>
             <Link
-              href="/plans"
+              href="/workouts"
               className="px-4 py-2 border border-white rounded w-36 text-center"
             >
               Browse Plans
             </Link>
           </div>
 
-          {/* Register button (same total width as above row) */}
+          {/* Login button (same total width as above row) */}
           <Link
-            href="/auth/register"
+            href="/auth/login"
             className="block w-[18.5rem] bg-orange-500 text-white text-xl py-2 rounded text-center hover:bg-orange-600 transition"
           >
-            Register
+            Login
           </Link>
         </div>
       </main>
-
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <p className="text-green-600 text-2xl">Hello I am the footer</p>
-      </footer>
     </div>
   );
 }
