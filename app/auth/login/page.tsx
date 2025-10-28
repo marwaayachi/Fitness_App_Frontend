@@ -25,34 +25,53 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-12 bg-white p-6 rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">Sign in</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <input
-          {...register("email")}
-          placeholder="Email"
-          className="w-full p-2 border rounded"
-        />
-        <input
-          {...register("password")}
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded"
-        />
-        <button className="w-full py-2 bg-blue-600 text-white rounded">
-          Sign in
-        </button>
-      </form>
+    <div className="min-h-screen flex">
+      {/* Left side - Login form */}
+      <div className="flex-1 flex items-center justify-center bg-orange-500 p-10">
+        <div className="max-w-md w-full">
+          <h2 className="text-5xl text-white text-center font-semibold mb-12">Sign in</h2>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <input
+              {...register("email")}
+              placeholder="Email"
+              className="w-full p-2 border border-amber-50 rounded"
+            />
+            <input
+              {...register("password")}
+              type="password"
+              placeholder="Password"
+              className="w-full p-2 border border-amber-50  rounded"
+            />
+            <button className="w-full py-2 bg-gray-200 text-lg  text-orange-500 rounded hover:bg-gray-300  transition">
+              Sign in
+            </button>
+          </form>
 
-      {/* Link to Register */}
-      <p className="mt-4 text-sm">
-        Don’t have an account?{" "}
-        <Link href="/auth/register" className="text-blue-400 hover:underline">
-          Register
-        </Link>
-      </p>
+          {/* Link to Register */}
+          <p className="mt-4 text-sm text-white text-center">
+            Don’t have an account?{" "}
+            <Link
+              href="/auth/register"
+              className="text-amber-300 hover:underline"
+            >
+              Register
+            </Link>
+          </p>
 
-      {message && <p className="mt-4 text-center">{message}</p>}
+          {message && (
+            <p className="mt-4 text-center text-red-500">{message}</p>
+          )}
+        </div>
+      </div>
+
+      {/* Right side - Image */}
+      <div className="flex-1 hidden lg:flex items-center justify-center bg-gray-100">
+        <img
+          src="/Login.png"
+          alt="Login Illustration"
+          className="w-3/4 h-auto object-contain"
+        />
+      </div>
     </div>
   );
 }
