@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { LoginPayload, User } from './types';
 
+
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_BASE || 'NEXT_PUBLIC_BACKEND_URL:4000/api',
   withCredentials: true, 
 });
 
