@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import api from "@/lib/api";
+// import api from "@/lib/api";
 
 export default function WorkoutLogger() {
     const [exercise, setExercise] = useState("");
@@ -25,8 +25,7 @@ export default function WorkoutLogger() {
               ],
             };
 
-            const { data } = await api.post('/workouts', payload);
-            console.log(data);
+            // const { data } = await api.post('/workouts', payload);
             alert('Workout logged');
             setExercise("");
         } catch(err) {
